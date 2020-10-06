@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>product.bangbangeducation.ru</title>
+    <meta name="title" content="product.bangbangeducation.ru" />
+    <meta name="description" content="product.bangbangeducation.ru" />
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+
+<body>
+    <p>Redirecting to <a href="" id="redirect-link"></a> in <span id="timer"></span> seconds...</p>
+
+    <script>
+    (function() {
+        var hostIndex, i, len, redirects, redirectLink, redirectHost, timer, elapsed, interval;
+
+        redirects = [
+            {
+                from: 'product.bangbangeducation.ru',
+                to: 'ux.bangbangeducation.ru'
+            }
+        ];
+
+        timer = 5000;
+        elapsed = 0;
+
+        redirectLink = document.getElementById('redirect-link');
+
+        if(location.hostname) {
+            redirectHost = getRedirectTo(location.hostname);
+        }
+
+        redirectHost && (
+            timerFn(),
+            (redirectLink.href = 'https://' + redirectHost + '/'),
+            (redirectLink.innerHTML = redirectHost),
+            (interval = setInterval(timerFn, 1000)),
+            setTimeout(function() {
+                window.location.href = redirectLink.href;
+            }, timer)
+        );
+
+        function timerFn() {
+            var val = timer / 1000 - elapsed++;
+            document.getElementById('timer').innerHTML = val;
+            val || clearInterval(interval);
+        }
+
+        function getRedirectTo(host) {
+            return redirects.reduce(function(acc, item) {
+                if(item.from === host) {
+                    acc = item.to;
+                }
+                return acc;
+            }, null);
+        }
+    })();
+    </script>
+</body>
+</html>
